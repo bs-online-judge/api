@@ -1,7 +1,12 @@
 package main
 
-import "github.com/bs-online-judge/api/api"
+import (
+  "net/http"
+  "log"
+
+  "github.com/bs-online-judge/api/api"
+)
 
 func main() {
-  api.Run()
+  log.Fatal(http.ListenAndServe(":8080", api.Router()))
 }
