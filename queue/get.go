@@ -1,4 +1,4 @@
-package submissions
+package queue
 
 import (
   "fmt"
@@ -6,7 +6,7 @@ import (
 )
 
 func Get(w http.ResponseWriter, r *http.Request) bool {
-  fmt.Println("GET /submissions")
-  fmt.Fprintf(w, "GET /submissions")
+  fmt.Println("GET /queue")
+  fmt.Fprintf(w, "GET /queue")
   return true
 }
