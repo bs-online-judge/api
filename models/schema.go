@@ -18,7 +18,11 @@ func CreateTables() error {
     Database: "bsoj",
   })
   tables := []interface{} {
+    &User{},
+    &Problem{},
+    &Submission{},
     &Task{},
+    &Contest{},
   }
   for _, table := range tables {
     err := db.CreateTable(table, nil)
