@@ -2,10 +2,14 @@ package api
 
 import "net/http"
 
-func Chain(middlewares ...func(http.ResponseWriter, *http.Request) bool) func(http.ResponseWriter, *http.Request) {
+func Chain(middlewares ...func(*App) bool) func(http.ResponseWriter, *http.Request) {
   return func(w http.ResponseWriter, r *http.Request) {
+    app, err := NewApp(w, r)
+    if err != nil {
+      return
+    }
     for _, m := range middlewares {
-      if !m(w, r) {
+      if !m(app) {
         return
       }
     }

@@ -1,13 +1,9 @@
 package api
 
-import (
-  "github.com/bs-online-judge/api/tasks"
-
-  "github.com/gorilla/mux"
-)
+import "github.com/gorilla/mux"
 
 func Router() *mux.Router {
   r := mux.NewRouter()
-  r.HandleFunc("/tasks", Chain(tasks.GetAll)).Methods("GET")
+  r.HandleFunc("/tasks", Chain(GetAllTasks)).Methods("GET")
   return r
 }

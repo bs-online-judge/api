@@ -4,9 +4,9 @@ import (
   "os"
   "log"
   "net/http"
-
-  "github.com/bs-online-judge/api/api"
+  
   "github.com/bs-online-judge/api/models"
+  "github.com/bs-online-judge/api/api"
 )
 
 func main() {

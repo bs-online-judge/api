@@ -2,9 +2,9 @@ package models
 
 import (
   "os"
-  "strings"
   
   "github.com/go-pg/pg"
+  "github.com/go-pg/pg/orm"
 )
 
 // db handle
@@ -25,8 +25,8 @@ func CreateTables() error {
     &Contest{},
   }
   for _, table := range tables {
-    err := db.CreateTable(table, nil)
-    if err != nil && !strings.Contains(err.Error(), "already exists") {
+    err := db.CreateTable(table, &orm.CreateTableOptions{ IfNotExists: true })
+    if err != nil {
       return err
     }
   }
