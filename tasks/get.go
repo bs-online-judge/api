@@ -1,11 +1,11 @@
-package queue
+package tasks
 
 import (
   "fmt"
   "net/http"
 )
 
-func Get(w http.ResponseWriter, r *http.Request) bool {
+func GetAll(w http.ResponseWriter, r *http.Request) bool {
   fmt.Println("GET /queue")
   fmt.Fprintf(w, "GET /queue")
   return true
