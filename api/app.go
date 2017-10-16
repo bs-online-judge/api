@@ -4,6 +4,7 @@ import (
   "net/http"
 
   "github.com/bs-online-judge/api/models"
+  "github.com/bs-online-judge/api/helpers"
 )
 
 type App struct {
@@ -13,9 +14,14 @@ type App struct {
 }
 
 func NewApp(w http.ResponseWriter, r *http.Request) (*App, error) {
-  app := &App{
-    response: w,
-    request: r,
+  username, password, ok := r.BasicAuth()
+  if !ok {
+    return &App{response: w, request: r}, nil
   }
-  return app, nil
+  user, err := models.GetUserByCredentials(username, password)
+  if err != nil {
+    helpers.Unauthorized(w)
+    return nil, err
+  }
+  return &App{w, r, user}, nil
 }
