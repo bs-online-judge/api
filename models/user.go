@@ -1,9 +1,7 @@
 package models
 
 import (
-  "errors"
-  
-  //"golang.org/x/crypto/bcrypt"
+  "golang.org/x/crypto/bcrypt"
 )
 
 // user groups
@@ -17,7 +15,7 @@ type User struct {
   Id            int
   Group         int8    `sql:",notnull,default:0"` // RegisteredGroup
   Username      string  `sql:",notnull,unique,type:varchar(255)"`
-  Password  string  `sql:",notnull,type:varchar(255)"`
+  PasswordHash  []byte  `sql:",notnull"`
 }
 
 func GetUserByCredentials(username, password string) (*User, error) {
@@ -25,8 +23,19 @@ func GetUserByCredentials(username, password string) (*User, error) {
   if err := db.Model(user).Where("username = ?", username).Select(); err != nil {
     return nil, err
   }
-  if user.Password != password {
-    return nil, errors.New("invalid username/password")
+  if err := bcrypt.CompareHashAndPassword(user.PasswordHash, []byte(password)); err != nil {
+    return nil, err
   }
   return user, nil
+}
+
+func CreateUser(username, password string) error {
+  passwordHash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+  if err != nil {
+    return err
+  }
+  if err := db.Insert(&User{ Username: username, PasswordHash: passwordHash }); err != nil {
+    return err
+  }
+  return nil
 }
