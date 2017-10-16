@@ -10,8 +10,7 @@ import (
 )
 
 func main() {
-  err := models.CreateTables()
-  if err != nil {
+  if err := models.CreateTables(); err != nil {
     log.Fatal(err)
   }
   log.Fatal(http.ListenAndServe(":" + os.Getenv("API_PORT"), api.Router()))

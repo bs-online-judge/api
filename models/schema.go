@@ -25,8 +25,7 @@ func CreateTables() error {
     &Contest{},
   }
   for _, table := range tables {
-    err := db.CreateTable(table, &orm.CreateTableOptions{ IfNotExists: true })
-    if err != nil {
+    if err := db.CreateTable(table, &orm.CreateTableOptions{ IfNotExists: true }); err != nil {
       return err
     }
   }
