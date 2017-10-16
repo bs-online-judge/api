@@ -5,8 +5,8 @@ import "errors"
 type User struct {
   Id        int
   Group     int8    `sql:",notnull,default:0"`
-  Username  string  `sql:",notnull,unique"`
-  Password  string  `sql:",notnull"`
+  Username  string  `sql:",notnull,unique,type:varchar(255)"`
+  Password  string  `sql:",notnull,type:varchar(255)"`
 }
 
 func GetUserByCredentials(username, password string) (*User, error) {
