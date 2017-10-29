@@ -11,6 +11,7 @@ const (
   AdminGroup      = 2
 )
 
+// this table is read-heavy!
 type User struct {
   Id            int
   Group         int8    `sql:",notnull,default:0"` // RegisteredGroup
