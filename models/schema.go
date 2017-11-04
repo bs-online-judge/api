@@ -2,7 +2,7 @@ package models
 
 import (
   "os"
-  
+
   "github.com/go-pg/pg"
   "github.com/go-pg/pg/orm"
 )
@@ -12,8 +12,8 @@ var db *pg.DB
 
 func CreateTables() error {
   db = pg.Connect(&pg.Options{
-    Addr: os.Getenv("PG_ADDR"),
-    User: os.Getenv("PG_USER"),
+    Addr: os.Getenv("PG_HOSTNAME"),
+    User: os.Getenv("PG_USERNAME"),
     Password: os.Getenv("PG_PASSWORD"),
     Database: "bsoj",
   })

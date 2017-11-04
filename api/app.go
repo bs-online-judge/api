@@ -3,25 +3,31 @@ package api
 import (
   "net/http"
 
-  "github.com/bs-online-judge/api/models"
-  "github.com/bs-online-judge/api/helpers"
+  "github.com/bs-online-judge/api/redis"
 )
 
 type App struct {
   response http.ResponseWriter
   request *http.Request
-  user *models.User
+  userSession *redis.UserSession
 }
 
 func NewApp(w http.ResponseWriter, r *http.Request) (*App, error) {
-  username, password, ok := r.BasicAuth()
-  if !ok {
+  sessionCookie, err := r.Cookie("sessionId")
+
+
+  // User not logged
+  if err != nil {
     return &App{response: w, request: r}, nil
   }
-  user, err := models.GetUserByCredentials(username, password)
+
+  var userSession *redis.UserSession
+  userSession, err = redis.GetUserSession(sessionCookie.Value)
+
+  // Session exists
   if err != nil {
-    helpers.Unauthorized(w)
-    return nil, err
+    return &App{response: w, request: r}, nil
   }
-  return &App{w, r, user}, nil
+
+  return &App{w, r, userSession}, nil
 }
