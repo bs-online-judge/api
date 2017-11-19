@@ -15,7 +15,6 @@ type App struct {
 func NewApp(w http.ResponseWriter, r *http.Request) (*App, error) {
   sessionCookie, err := r.Cookie("sessionId")
 
-
   // User not logged
   if err != nil {
     return &App{response: w, request: r}, nil
