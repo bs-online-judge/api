@@ -12,21 +12,22 @@ type App struct {
   userSession *redis.UserSession
 }
 
-func NewApp(w http.ResponseWriter, r *http.Request) (*App, error) {
+func NewApp(w http.ResponseWriter, r *http.Request) *App {
   sessionCookie, err := r.Cookie("sessionId")
 
-  // User not logged
+  // no session cookie
   if err != nil {
-    return &App{response: w, request: r}, nil
+    return &App{response: w, request: r}
   }
 
+  // fetch user session
   var userSession *redis.UserSession
   userSession, err = redis.GetUserSession(sessionCookie.Value)
 
-  // Session exists
+  // invalid session
   if err != nil {
-    return &App{response: w, request: r}, nil
+    return &App{response: w, request: r}
   }
 
-  return &App{w, r, userSession}, nil
+  return &App{w, r, userSession}
 }
