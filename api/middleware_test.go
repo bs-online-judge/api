@@ -10,7 +10,7 @@ import (
   . "github.com/onsi/gomega"
 )
 
-var _ = Describe("Middleware", func() {
+var _ = Describe("Middlewares", func() {
   var count int
   var w http.ResponseWriter
   var r *http.Request
