@@ -1,2 +1,2 @@
-# api
-Business logic.
+# bs-online-judge
+A modern online judge.
