@@ -50,10 +50,15 @@ A website for the user to interact with the system. The website consumes the *we
 A command-line interface for the user to interact with the system. The CLI consumes the *core API* subset.
 
 ## Architechture Implementation
+This section describes our implementation of the architechture described above.
 
+### Technologies
 * The networking protocol chosen for communication between all clients and servers is HTTP.
 * The programming language chosen for the backend applications and the CLI is Golang.
 * The relational DBMS chosen is PostgreSQL.
 * Redis will be used as cache and message broker.
 * AWS S3 can be used as production file storage. For small scale environments we provide an implementation of an S3-API-compliant HTTP server in Golang.
 * The website should be built with the fanciest technology of the moment.
+
+### API Resources
+TODO.
