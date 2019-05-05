@@ -1,6 +1,12 @@
 # bs-online-judge
 A modern online judge.
 
+## Building, running and testing locally
+TODO.
+
+## Running in large scale
+TODO.
+
 ## System Architecture
 This section describes the components of the system.
 
@@ -28,25 +34,25 @@ The timeout engine is a worker responsible for watching the problem submissions 
 ### Data Stores
 This section describes the components of the system responsible for storing all sorts of data.
 
-#### Relational DBMS
+#### The Relational DBMS
 A relational database should store the data behind the resources of the system exposed by the API.
 
-#### Cache
+#### The Cache
 A cache should store the short-living auxiliar data shared by the API servers, like session tokens.
 
-#### Queue Message Broker
+#### The Queue Message Broker
 A message broker should act as a queue receiving submission execution jobs from the API servers and delivering those jobs atomically in FIFO order to the judges.
 
-#### File Storage
+#### The File Storage
 A file storage should store and serve files related to problems and submissions, like source codes, inputs and outputs.
 
 ### User Interfaces
 This section describes the user interfaces of the system.
 
-#### Website
+#### The Website
 A website for the user to interact with the system. The website consumes the *web API* subset.
 
-#### Command-line Interface
+#### The Command-line Interface
 A command-line interface for the user to interact with the system. The CLI consumes the *core API* subset.
 
 ## Architechture Implementation
@@ -60,5 +66,16 @@ This section describes our implementation of the architechture described above.
 * AWS S3 can be used as production file storage. For small scale environments we provide an implementation of an S3-API-compliant HTTP server in Golang.
 * The website should be built with the fanciest technology of the moment.
 
-### API Resources
+### API Definitions
+TODO.
+
+### Configurations
+This section describes all kinds of configurations for each system component.
+
+TODO: Describe build time configuration files, database and cache stored settings, environment variables...
+
+### Roadmap
+TODO.
+
+### Benchmarks
 TODO.
